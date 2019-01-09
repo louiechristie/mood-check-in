@@ -1,21 +1,11 @@
 import React from 'react';
 import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
-import { connect } from 'react-redux';
-import { checkinsFetchData } from '../actions/checkins';
-import { URL_BASE_API, URL_PATH_CHECKINS } from '../../../constants/API';
+import AverageMoodContainer from '../../containers/AverageMoodContainer';
 
-class InsightsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Insights',
-  };
-
+class Insights extends React.Component {
   constructor(props) {
     super(props);
     this.renderCheckin = this.renderCheckin.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.fetchData(`${URL_BASE_API}${URL_PATH_CHECKINS}`);
   }
 
   renderCheckin(checkin) {
@@ -42,6 +32,8 @@ class InsightsScreen extends React.Component {
         checkins && (
           <ScrollView>
             <View>
+              <AverageMoodContainer checkins={checkins} />
+
               <Text>Checkins</Text>
 
               {isLoading && <ActivityIndicator />}
@@ -63,21 +55,4 @@ class InsightsScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    checkins: state.checkins,
-    hasErrored: state.checkinsHasErrored,
-    isLoading: state.checkinsIsLoading,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchData: url => dispatch(checkinsFetchData(url)),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InsightsScreen);
+export default Insights;
