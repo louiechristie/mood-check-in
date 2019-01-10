@@ -1,3 +1,10 @@
+import {
+  CHECKINS_HAS_ERRORED,
+  CHECKINS_IS_LOADING,
+  CHECKINS_FETCH_DATA_SUCCESS,
+  CHECKINS_DELETE_SUCCESS,
+} from '../constants/ActionTypes';
+
 export function checkinsHasErrored(state = false, action) {
   switch (action.type) {
     case 'CHECKINS_HAS_ERRORED':
@@ -18,6 +25,8 @@ export function checkins(state = [], action) {
   switch (action.type) {
     case 'CHECKINS_FETCH_DATA_SUCCESS':
       return action.checkins;
+    case 'CHECKINS_DELETE_SUCCESS':
+      return state.filter(({ id }) => id !== action.id);
     default:
       return state;
   }

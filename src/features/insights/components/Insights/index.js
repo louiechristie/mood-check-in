@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
+import { ScrollView, View, Text, ActivityIndicator, Button } from 'react-native';
 import AverageMoodContainer from '../../containers/AverageMoodContainer';
 
 class Insights extends React.Component {
@@ -8,10 +8,20 @@ class Insights extends React.Component {
     this.renderCheckin = this.renderCheckin.bind(this);
   }
 
+  // renderDeleteAllButton() {
+  //   return (
+  //     <Button
+  //       title="DeleteAll"
+  //       onPress={() => this.props.deleteMultiple(this.props.checkins.map(({ id }) => id))}
+  //     />
+  //   );
+  // }
+
   renderCheckin(checkin) {
     return (
       <View key={checkin.id}>
         <Text>{JSON.stringify(checkin)}</Text>
+        <Button title="Delete" onPress={() => this.props.delete(checkin.id)} />
       </View>
     );
   }

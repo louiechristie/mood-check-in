@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { checkinsFetchData } from '../actions/checkins';
-import { URL_BASE_API, URL_PATH_CHECKINS } from '../../../constants/API';
+import { checkinsFetchData, checkinsDelete } from '../actions/checkins';
 import Insights from '../components/Insights';
 
 class InsightsContainer extends React.Component {
@@ -10,7 +9,7 @@ class InsightsContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchData(`${URL_BASE_API}${URL_PATH_CHECKINS}`);
+    this.props.fetchData();
   }
 
   render() {
@@ -28,7 +27,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: url => dispatch(checkinsFetchData(url)),
+    fetchData: () => dispatch(checkinsFetchData()),
+    delete: id => dispatch(checkinsDelete(id)),
   };
 };
 
