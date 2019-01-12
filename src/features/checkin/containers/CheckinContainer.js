@@ -1,18 +1,34 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React from 'React';
+import { ScrollView, View, StyleSheet, Dimensions } from 'react-native';
+import MoodSlider from '../components/MoodSlider';
 
-class CheckinContainer extends React.Component {
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+const smallerDimension = Math.min(width, height);
+
+export default class CheckinContainer extends React.Component {
   static navigationOptions = {
-    title: 'Checkin',
+    title: 'Check-in',
   };
 
   render() {
     return (
-      <View>
-        <Text>Checkin</Text>
-      </View>
+      <ScrollView>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            paddingVertical: 20,
+          }}>
+          <View
+            style={{
+              flex: 1,
+              width: smallerDimension,
+            }}>
+            <MoodSlider />
+          </View>
+        </View>
+      </ScrollView>
     );
   }
 }
-
-export default CheckinContainer;

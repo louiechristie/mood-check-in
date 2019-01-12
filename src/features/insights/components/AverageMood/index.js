@@ -43,10 +43,8 @@ class AverageMood extends React.Component {
   render() {
     const width = Dimensions.get('window').width;
     const height = Dimensions.get('window').height;
-    const smallerDimension = () => {
-      return width < height ? width : height;
-    };
-    const outer = smallerDimension() * (2 / 3);
+    const smallerDimension = Math.min(width, height);
+    const outer = smallerDimension * (2 / 3);
     const inner = 60;
     const { data, total } = this.props;
     const selectedDataRow = data.find(dataRow => {
