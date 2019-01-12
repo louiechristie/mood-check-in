@@ -43,9 +43,12 @@ export function checkinsFetchData() {
         return response;
       })
       .then(response => response.json())
-      .then(checkins => dispatch(checkinsFetchDataSuccess(checkins)))
+      .then(checkins => {
+        dispatch(checkinsFetchDataSuccess(checkins));
+        dispatch(checkinsHasErrored(false));
+      })
       .catch(error => {
-        console.error(JSON.stringify(error));
+        console.warn(JSON.stringify(error));
         dispatch(checkinsHasErrored(true));
       });
   };
@@ -81,7 +84,7 @@ export function checkinsDelete(id) {
         dispatch(checkinsDeleteSuccess(id));
       })
       .catch(error => {
-        console.error(JSON.stringify(error));
+        console.warn(JSON.stringify(error));
         dispatch(checkinsHasErrored(true));
       });
   };

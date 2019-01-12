@@ -41,7 +41,7 @@ class Insights extends React.Component {
       return (
         checkins && (
           <ScrollView>
-            <View>
+            <View style={{ flex: 1 }}>
               <AverageMoodContainer checkins={checkins} />
 
               <Text>Checkins</Text>

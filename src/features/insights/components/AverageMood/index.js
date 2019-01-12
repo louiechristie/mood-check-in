@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import Svg, { Image } from 'react-native-svg';
+import { View, Text, Image, Dimensions } from 'react-native';
+import { Svg } from 'expo';
 import { VictoryPie } from 'victory-native';
 import Colors from '../../../../constants/Colors';
-import Layout from '../../../../constants/Layout';
 
 import checkin_1 from '../../../../assets/images/checkin_1.png';
 import checkin_2 from '../../../../assets/images/checkin_2.png';
@@ -42,63 +41,96 @@ class AverageMood extends React.Component {
   }
 
   render() {
-    const { data, total } = this.props;
-    const width = Layout.window.width;
+    const width = Dimensions.get('window').width;
+    const height = Dimensions.get('window').height;
+    const smallerDimension = () => {
+      return width < height ? width : height;
+    };
+    const outer = smallerDimension() * (2 / 3);
     const inner = 60;
-    const row = data.find(row => {
-      return row.mood === this.state.selected;
+    const { data, total } = this.props;
+    const selectedDataRow = data.find(dataRow => {
+      return dataRow.mood === this.state.selected;
     });
-    const percentage = row.percentage;
+    const percentage = selectedDataRow.percentage;
 
     return (
-      <View>
-        <Text>Average Mood</Text>
-        <Svg
-          width={width}
-          height={width}
-          viewBox={`0 0 ${width} ${width}`}
-          style={{ width: '100%', height: 'auto' }}>
-          <Image
-            x={width / 2 - inner / 2}
-            y={width / 2 - inner / 2}
-            width={inner}
-            height={inner}
-            href={getImage(this.state.selected)}
-          />
-          <VictoryPie
-            width={width}
-            height={width}
-            nampe="pie"
-            standalone={false}
-            colorScale={data.map(row => {
-              return Colors[row.mood];
-            })}
-            x="mood"
-            y="tally"
-            innerRadius={60}
-            padAngle={3}
-            radius={datum => {
-              return datum.mood === this.state.selected ? 110 : 100;
-            }}
-            labels={() => null}
-            data={data}
-            animate={{ duration: 1500 }}
-            events={[
-              {
-                target: 'data',
-                eventHandlers: {
-                  onPressIn: (evt, clickedProps) => {
-                    this.setState({ selected: clickedProps.datum.mood });
-                    return null;
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+        }}>
+        <View
+          style={{
+            flex: 2,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View
+            style={{
+              width: outer,
+              height: outer,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Image
+              resizeMode="contain"
+              source={getImage(this.state.selected)}
+              style={{ width: inner, height: inner }}
+            />
+          </View>
+          <View
+            style={{
+              width: outer,
+              height: outer,
+              position: 'absolute',
+              flex: 2,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Svg width={width} height={outer} viewBox={`0 0 ${outer} ${outer}`}>
+              <VictoryPie
+                width={outer}
+                height={outer}
+                nampe="pie"
+                standalone={false}
+                colorScale={data.map(row => {
+                  return Colors[row.mood];
+                })}
+                x="mood"
+                y="tally"
+                innerRadius={inner}
+                padAngle={3}
+                radius={datum => {
+                  return datum.mood === this.state.selected ? 110 : 100;
+                }}
+                labels={() => null}
+                data={data}
+                events={[
+                  {
+                    target: 'data',
+                    eventHandlers: {
+                      onPressIn: (evt, clickedProps) => {
+                        this.setState({ selected: clickedProps.datum.mood });
+                        return null;
+                      },
+                    },
                   },
-                },
-              },
-            ]}
-          />
-        </Svg>
-        <View>
-          <Text>{percentage}%</Text>
-          <Text>Based on {total} entries</Text>
+                ]}
+              />
+            </Svg>
+          </View>
+        </View>
+
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            paddingVertical: 10,
+          }}>
+          <Text style={{ fontSize: 40, color: Colors[this.state.selected] }}>{percentage}%</Text>
+          <Text style={{ fontSize: 16 }}>Based on {total} entries</Text>
         </View>
       </View>
     );
