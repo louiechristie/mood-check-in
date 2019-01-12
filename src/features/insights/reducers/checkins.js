@@ -7,7 +7,7 @@ import {
 
 export function checkinsHasErrored(state = false, action) {
   switch (action.type) {
-    case 'CHECKINS_HAS_ERRORED':
+    case CHECKINS_HAS_ERRORED:
       return action.hasErrored;
     default:
       return state;
@@ -15,7 +15,7 @@ export function checkinsHasErrored(state = false, action) {
 }
 export function checkinsIsLoading(state = false, action) {
   switch (action.type) {
-    case 'CHECKINS_IS_LOADING':
+    case CHECKINS_IS_LOADING:
       return action.isLoading;
     default:
       return state;
@@ -23,9 +23,9 @@ export function checkinsIsLoading(state = false, action) {
 }
 export function checkins(state = [], action) {
   switch (action.type) {
-    case 'CHECKINS_FETCH_DATA_SUCCESS':
+    case CHECKINS_FETCH_DATA_SUCCESS:
       return action.checkins;
-    case 'CHECKINS_DELETE_SUCCESS':
+    case CHECKINS_DELETE_SUCCESS:
       return state.filter(({ id }) => id !== action.id);
     default:
       return state;
