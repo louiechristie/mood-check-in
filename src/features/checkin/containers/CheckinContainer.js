@@ -8,9 +8,11 @@ import {
   TextInput,
   Switch,
   Button,
-  StatusBar,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
+import { connect } from 'react-redux';
+import { checkinsAdd, checkinsDelete } from '../../insights/actions/checkins';
 import MoodSlider from '../components/MoodSlider';
 
 const width = Dimensions.get('window').width;
@@ -19,7 +21,7 @@ const smallerDimension = Math.min(width, height);
 
 const feelingsList = ['depressed', 'optimistic', 'bored', 'happy'];
 
-export default class CheckinContainer extends React.Component {
+class CheckinContainer extends React.Component {
   static navigationOptions = {
     title: 'Check-in',
   };
@@ -29,7 +31,7 @@ export default class CheckinContainer extends React.Component {
     this.state = {
       mood: 4,
       feelings: [],
-      comment: 'Type your optional note here...',
+      comment: '',
     };
     this.renderFeeling = this.renderFeeling.bind(this);
   }
@@ -69,12 +71,22 @@ export default class CheckinContainer extends React.Component {
   }
 
   render() {
+    const { isLoading, hasErrored } = this.props;
+
+    if (hasErrored) {
+      return (
+        <View>
+          <Text>Sorry, something went wrong. Please try again later.</Text>
+        </View>
+      );
+    }
+
     return (
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior="padding"
+        behavior={Platform.OS === 'ios' ? 'position' : 'padding'}
         enabled
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 30 : 80}>
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 80}>
         <ScrollView>
           <View
             style={{
@@ -102,6 +114,7 @@ export default class CheckinContainer extends React.Component {
 
               <TextInput
                 value={this.state.comment}
+                placeholder={'Type your optional note here...'}
                 style={{
                   height: 40,
                   borderColor: 'gray',
@@ -110,14 +123,20 @@ export default class CheckinContainer extends React.Component {
                   padding: 8,
                   fontSize: 12,
                 }}
-                onChange={comment => {
+                onChangeText={comment => {
                   this.setState({
                     comment,
                   });
                 }}
               />
 
-              <Button title="submit" onPress={() => {}} />
+              <Button
+                title="submit"
+                onPress={() => {
+                  this.props.add(this.state);
+                }}
+              />
+              {isLoading && <ActivityIndicator />}
             </View>
           </View>
         </ScrollView>
@@ -125,3 +144,22 @@ export default class CheckinContainer extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    hasErrored: state.checkinsHasErrored,
+    isLoading: state.checkinsIsLoading,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    add: checkin => dispatch(checkinsAdd(checkin)),
+    delete: id => dispatch(checkinsDelete(id)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CheckinContainer);

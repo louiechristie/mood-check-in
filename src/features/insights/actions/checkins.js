@@ -3,6 +3,7 @@ import {
   CHECKINS_IS_LOADING,
   CHECKINS_FETCH_DATA_SUCCESS,
   CHECKINS_DELETE_SUCCESS,
+  CHECKINS_ADD_SUCCESS,
 } from '../constants/ActionTypes';
 
 import { URL_BASE_API, URL_PATH_CHECKINS } from '../../../constants/API';
@@ -99,3 +100,43 @@ export function checkinsDelete(id) {
 //     }
 //   };
 // }
+
+export function checkinsAddSuccess(checkin) {
+  return {
+    type: CHECKINS_ADD_SUCCESS,
+    checkin,
+  };
+}
+
+export function checkinsAdd(checkin) {
+  console.log('checkinsAdd checkin: ', JSON.stringify(checkin));
+
+  return dispatch => {
+    dispatch(checkinsIsLoading(true));
+
+    fetch(`${url}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(checkin),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response);
+        }
+
+        dispatch(checkinsIsLoading(false));
+
+        return response;
+      })
+      .then(response => response.json())
+      .then(responseJSON => {
+        dispatch(checkinsAddSuccess(responseJSON));
+      })
+      .catch(error => {
+        console.warn(JSON.stringify(error));
+        dispatch(checkinsHasErrored(true));
+      });
+  };
+}

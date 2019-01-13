@@ -3,6 +3,7 @@ import {
   CHECKINS_IS_LOADING,
   CHECKINS_FETCH_DATA_SUCCESS,
   CHECKINS_DELETE_SUCCESS,
+  CHECKINS_ADD_SUCCESS,
 } from '../constants/ActionTypes';
 
 export function checkinsHasErrored(state = false, action) {
@@ -27,6 +28,8 @@ export function checkins(state = [], action) {
       return action.checkins;
     case CHECKINS_DELETE_SUCCESS:
       return state.filter(({ id }) => id !== action.id);
+    case CHECKINS_ADD_SUCCESS:
+      return [...state, action.checkin];
     default:
       return state;
   }
