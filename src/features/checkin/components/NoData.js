@@ -5,7 +5,7 @@ const checkin_7 = require('../../../assets/images/checkin_7.png');
 
 class NoData extends React.Component {
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, navigation } = this.props;
 
     return (
       <View
@@ -40,7 +40,7 @@ class NoData extends React.Component {
             <Button
               title="Check-in"
               onPress={() => {
-                this.props.navigation.navigate('Checkin');
+                navigation.navigate('Checkin');
               }}
             />
           </View>
