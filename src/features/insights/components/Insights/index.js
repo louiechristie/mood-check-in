@@ -1,6 +1,7 @@
 import React from 'react';
-import { ScrollView, View, Text, ActivityIndicator, Button } from 'react-native';
+import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
 import AverageMoodContainer from '../../containers/AverageMoodContainer';
+import Checkin from '../Checkin';
 
 class Insights extends React.Component {
   constructor(props) {
@@ -19,10 +20,11 @@ class Insights extends React.Component {
 
   renderCheckin(checkin) {
     return (
-      <View key={checkin.id}>
-        <Text>{JSON.stringify(checkin)}</Text>
-        <Button title="Delete" onPress={() => this.props.delete(checkin.id)} />
-      </View>
+      <Checkin
+        key={checkin.id}
+        checkin={checkin}
+        onPressDelete={() => this.props.delete(checkin.id)}
+      />
     );
   }
 
@@ -44,11 +46,11 @@ class Insights extends React.Component {
             <View style={{ flex: 1 }}>
               <AverageMoodContainer checkins={checkins} />
 
-              <Text>Checkins</Text>
-
               {isLoading && <ActivityIndicator />}
 
-              {checkins.map(checkin => this.renderCheckin(checkin))}
+              <View style={{ paddingHorizontal: 6 }}>
+                {checkins.map(checkin => this.renderCheckin(checkin))}
+              </View>
             </View>
           </ScrollView>
         )

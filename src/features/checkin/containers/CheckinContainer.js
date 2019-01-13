@@ -19,7 +19,7 @@ const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 const smallerDimension = Math.min(width, height);
 
-const feelingsList = ['depressed', 'optimistic', 'bored', 'happy'];
+const feelingsList = ['optimistic', 'happy', 'bored', 'depressed'];
 
 class CheckinContainer extends React.Component {
   static navigationOptions = {
@@ -117,7 +117,7 @@ class CheckinContainer extends React.Component {
                 placeholder={'Type your optional note here...'}
                 style={{
                   height: 40,
-                  borderColor: 'gray',
+                  borderColor: '#999999',
                   borderWidth: 1,
                   marginVertical: 10,
                   padding: 8,
@@ -133,7 +133,11 @@ class CheckinContainer extends React.Component {
               <Button
                 title="submit"
                 onPress={() => {
-                  this.props.add(this.state);
+                  const timestamp = Date.now();
+                  this.props.add({
+                    ...this.state,
+                    timestamp,
+                  });
                   this.props.navigation.navigate('Insights');
                 }}
               />
