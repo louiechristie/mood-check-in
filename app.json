@@ -19,6 +19,8 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "App for recording your moods by doing a \"check-in\" from time to time.",
+    "githubUrl": "https://github.com/louiechristie/mood-check-in"
   }
 }
