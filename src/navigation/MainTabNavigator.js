@@ -18,7 +18,7 @@ const CheckinStack = createStackNavigator({
 });
 
 CheckinStack.navigationOptions = {
-  tabBarLabel: 'Checkin',
+  tabBarLabel: 'Check-in',
   tabBarIcon: ({ focused }) => (
     <TabBarSvgIcon focused={focused}>
       <CheckinIcon />

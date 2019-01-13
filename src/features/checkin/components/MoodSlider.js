@@ -19,13 +19,13 @@ export default class MoodSlider extends React.Component {
     this.renderImage = this.renderImage.bind(this);
   }
 
-  change(value) {
-    this.setState(() => {
-      return {
-        value: parseFloat(value),
-      };
+  change(valueString) {
+    const value = parseFloat(valueString);
+
+    this.setState({
+      value,
     });
-    return this.state.value;
+    this.props.onChange(value);
   }
 
   renderImage() {
@@ -80,7 +80,7 @@ export default class MoodSlider extends React.Component {
           onValueChange={this.change}
           value={value}
           thumbTintColor={Colors.tintColor}
-          style={{ flex: 1, paddingVertical: 20 }}
+          style={{ flex: 1, paddingTop: 20 }}
         />
       </View>
     );
