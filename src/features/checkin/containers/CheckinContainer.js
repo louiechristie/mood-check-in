@@ -12,7 +12,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { checkinsAdd, checkinsDelete } from '../../insights/actions/checkins';
+import { checkinsAdd, checkinsDelete } from '../actions/checkins';
 import MoodSlider from '../components/MoodSlider';
 
 const width = Dimensions.get('window').width;

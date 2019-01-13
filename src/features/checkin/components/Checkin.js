@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, Button, Image } from 'react-native';
 
-const checkin_1 = require('../../../../assets/images/checkin_1.png');
-const checkin_2 = require('../../../../assets/images/checkin_2.png');
-const checkin_3 = require('../../../../assets/images/checkin_3.png');
-const checkin_4 = require('../../../../assets/images/checkin_4.png');
-const checkin_5 = require('../../../../assets/images/checkin_5.png');
-const checkin_6 = require('../../../../assets/images/checkin_6.png');
-const checkin_7 = require('../../../../assets/images/checkin_7.png');
+const checkin_1 = require('../../../assets/images/checkin_1.png');
+const checkin_2 = require('../../../assets/images/checkin_2.png');
+const checkin_3 = require('../../../assets/images/checkin_3.png');
+const checkin_4 = require('../../../assets/images/checkin_4.png');
+const checkin_5 = require('../../../assets/images/checkin_5.png');
+const checkin_6 = require('../../../assets/images/checkin_6.png');
+const checkin_7 = require('../../../assets/images/checkin_7.png');
 
 const getImage = number => {
   switch (number) {

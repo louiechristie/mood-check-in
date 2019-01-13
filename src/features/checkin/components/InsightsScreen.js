@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
-import AverageMoodContainer from '../../containers/AverageMoodContainer';
-import Checkin from '../Checkin';
+import AverageMoodChartContainer from '../containers/AverageMoodChartContainer';
+import Checkin from './Checkin';
 
 class Insights extends React.Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class Insights extends React.Component {
         checkins && (
           <ScrollView>
             <View style={{ flex: 1 }}>
-              <AverageMoodContainer checkins={checkins} />
+              <AverageMoodChartContainer checkins={checkins} />
 
               {isLoading && <ActivityIndicator />}
 

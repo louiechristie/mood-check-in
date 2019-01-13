@@ -3,7 +3,7 @@ import {
   checkins,
   checkinsHasErrored,
   checkinsIsLoading,
-} from '../features/insights/reducers/checkins.js';
+} from '../features/checkin/reducers/checkins';
 
 export default combineReducers({
   checkins,

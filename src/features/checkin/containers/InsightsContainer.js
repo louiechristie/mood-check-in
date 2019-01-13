@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { checkinsFetchData, checkinsDelete } from '../actions/checkins';
-import Insights from '../components/Insights';
+import InsightsScreen from '../components/InsightsScreen';
 
 class InsightsContainer extends React.Component {
   static navigationOptions = {
@@ -18,7 +18,7 @@ class InsightsContainer extends React.Component {
     return (
       <View>
         <NavigationEvents onDidFocus={this.props.fetchData} />
-        <Insights {...this.props} />
+        <InsightsScreen {...this.props} />
       </View>
     );
   }

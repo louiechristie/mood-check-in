@@ -7,14 +7,11 @@ import TabBarSvgIcon from './components/TabBarSvgIcon';
 import CheckinIcon from './components/CheckinIcon';
 import FlashIcon from './components/FlashIcon';
 import FlashFillIcon from './components/FlashFillIcon';
-import CheckinScreen from '../features/checkin/containers/CheckinContainer';
-import InsightsScreen from '../features/insights/containers/InsightsContainer';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import CheckinTab from '../features/checkin/containers/CheckinContainer';
+import InsightsTab from '../features/checkin/containers/InsightsContainer';
 
 const CheckinStack = createStackNavigator({
-  Checkin: CheckinScreen,
+  Checkin: CheckinTab,
 });
 
 CheckinStack.navigationOptions = {
@@ -27,7 +24,7 @@ CheckinStack.navigationOptions = {
 };
 
 const InsightsStack = createStackNavigator({
-  Insights: InsightsScreen,
+  Insights: InsightsTab,
 });
 
 InsightsStack.navigationOptions = {
@@ -37,50 +34,7 @@ InsightsStack.navigationOptions = {
   ),
 };
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-});
-
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
-
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
-});
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
-};
-
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
-
 export default createBottomTabNavigator({
   InsightsStack,
   CheckinStack,
-  // HomeStack,
-  // LinksStack,
-  // SettingsStack,
 });

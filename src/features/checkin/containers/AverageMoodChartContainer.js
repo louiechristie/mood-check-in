@@ -1,7 +1,7 @@
 import React from 'react';
-import AverageMood from '../components/AverageMood';
+import AverageMoodChart from '../components/AverageMoodChart';
 
-class AverageMoodContainer extends React.Component {
+class AverageMoodChartContainer extends React.Component {
   render() {
     if (!this.props.checkins || !this.props.checkins.length) {
       return null;
@@ -43,8 +43,10 @@ class AverageMoodContainer extends React.Component {
     }, {});
     const modalAverage = maxItem.mood;
 
-    return <AverageMood data={dataWithPercentages} total={total} modalAverage={modalAverage} />;
+    return (
+      <AverageMoodChart data={dataWithPercentages} total={total} modalAverage={modalAverage} />
+    );
   }
 }
 
-export default AverageMoodContainer;
+export default AverageMoodChartContainer;
