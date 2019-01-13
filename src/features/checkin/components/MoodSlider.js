@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Slider, Image } from 'react-native';
 import Colors from '../../../constants/Colors';
-import checkin_1 from '../../../assets/images/checkin_1.png';
-import checkin_2 from '../../../assets/images/checkin_2.png';
-import checkin_3 from '../../../assets/images/checkin_3.png';
-import checkin_4 from '../../../assets/images/checkin_4.png';
-import checkin_5 from '../../../assets/images/checkin_5.png';
-import checkin_6 from '../../../assets/images/checkin_6.png';
-import checkin_7 from '../../../assets/images/checkin_7.png';
+const checkin_1 = require('../../../assets/images/checkin_1.png');
+const checkin_2 = require('../../../assets/images/checkin_2.png');
+const checkin_3 = require('../../../assets/images/checkin_3.png');
+const checkin_4 = require('../../../assets/images/checkin_4.png');
+const checkin_5 = require('../../../assets/images/checkin_5.png');
+const checkin_6 = require('../../../assets/images/checkin_6.png');
+const checkin_7 = require('../../../assets/images/checkin_7.png');
 
 export default class MoodSlider extends React.Component {
   constructor(props) {
