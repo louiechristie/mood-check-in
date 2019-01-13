@@ -134,6 +134,7 @@ class CheckinContainer extends React.Component {
                 title="submit"
                 onPress={() => {
                   this.props.add(this.state);
+                  this.props.navigation.navigate('Insights');
                 }}
               />
               {isLoading && <ActivityIndicator />}
