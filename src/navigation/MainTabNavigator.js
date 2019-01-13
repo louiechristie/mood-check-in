@@ -1,8 +1,7 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
-import TabBarIcon from './components/TabBarIcon';
+import { createStackNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import Colors from '../constants/Colors';
 import TabBarSvgIcon from './components/TabBarSvgIcon';
 import CheckinIcon from './components/CheckinIcon';
 import FlashIcon from './components/FlashIcon';
@@ -34,7 +33,13 @@ InsightsStack.navigationOptions = {
   ),
 };
 
-export default createBottomTabNavigator({
-  InsightsStack,
-  CheckinStack,
-});
+export default createMaterialBottomTabNavigator(
+  {
+    InsightsStack,
+    CheckinStack,
+  },
+  {
+    activeColor: Colors.tabLabelSelected,
+    inactiveColor: Colors.tabLabelDefault,
+  }
+);

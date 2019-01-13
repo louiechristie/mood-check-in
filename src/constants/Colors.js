@@ -1,9 +1,14 @@
 const tintColor = '#3EB4B6';
+// #3EB4B6 This comment is for displaying tintColor in vsode colorize extension
+const white = '#FFFFFF';
+const grey = '#CCCCCC';
 
 export default {
   tintColor,
-  tabIconDefault: '#ccc',
-  tabIconSelected: tintColor,
+  tabLabelDefault: '#2b7d7f',
+  tabLabelSelected: white,
+  tabIconDefault: '#2b7d7f',
+  tabIconSelected: white,
   tabBar: '#fefefe',
   errorBackground: 'red',
   errorText: '#fff',

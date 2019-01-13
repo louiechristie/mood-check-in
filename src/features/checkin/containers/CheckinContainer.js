@@ -12,6 +12,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Appbar } from 'react-native-paper';
 import { checkinsAdd, checkinsDelete } from '../actions/checkins';
 import MoodSlider from '../components/MoodSlider';
 
@@ -24,6 +25,11 @@ const feelingsList = ['optimistic', 'happy', 'bored', 'depressed'];
 class CheckinContainer extends React.Component {
   static navigationOptions = {
     title: 'Check-in',
+    header: (
+      <Appbar.Header dark>
+        <Appbar.Content title="Check-in" />
+      </Appbar.Header>
+    ),
   };
 
   constructor(props) {
