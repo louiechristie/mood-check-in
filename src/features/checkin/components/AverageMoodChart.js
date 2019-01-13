@@ -36,7 +36,7 @@ class AverageMoodChart extends React.Component {
     super(props);
 
     this.state = {
-      selected: this.props.modalAverage,
+      selected: this.props.modalAverage || 4,
     };
   }
 
@@ -50,7 +50,7 @@ class AverageMoodChart extends React.Component {
     const selectedDataRow = data.find(dataRow => {
       return dataRow.mood === this.state.selected;
     });
-    const percentage = selectedDataRow.percentage;
+    const percentage = (selectedDataRow && selectedDataRow.percentage) || 0;
 
     return (
       <View
@@ -90,7 +90,7 @@ class AverageMoodChart extends React.Component {
               <VictoryPie
                 width={outer}
                 height={outer}
-                nampe="pie"
+                name="pie"
                 standalone={false}
                 colorScale={data.map(row => {
                   return Colors[row.mood];

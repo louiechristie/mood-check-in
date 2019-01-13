@@ -15,6 +15,8 @@ import { connect } from 'react-redux';
 import { Appbar } from 'react-native-paper';
 import { checkinsAdd, checkinsDelete } from '../actions/checkins';
 import MoodSlider from '../components/MoodSlider';
+import ErrorBoundary from '../components/ErrorBoundary';
+import SomethingWentWrong from '../components/SomethingWentWrong';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -80,78 +82,77 @@ class CheckinContainer extends React.Component {
     const { isLoading, hasErrored } = this.props;
 
     if (hasErrored) {
-      return (
-        <View>
-          <Text>Sorry, something went wrong. Please try again later.</Text>
-        </View>
-      );
+      return <SomethingWentWrong />;
     }
 
     return (
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'position' : 'padding'}
-        enabled
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 80}>
-        <ScrollView>
-          <View
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              paddingVertical: 20,
-            }}>
+      <ErrorBoundary>
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === 'ios' ? 'position' : 'padding'}
+          enabled
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 80}>
+          <ScrollView>
             <View
               style={{
                 flex: 1,
-                width: smallerDimension,
-                padding: 10,
+                alignItems: 'center',
+                paddingVertical: 20,
               }}>
-              <MoodSlider
-                onChange={mood => {
-                  this.setState({
-                    mood,
-                  });
-                }}
-              />
-
-              {feelingsList.map(feeling => {
-                return this.renderFeeling(feeling);
-              })}
-
-              <TextInput
-                value={this.state.comment}
-                placeholder={'Type your optional note here...'}
+              <View
                 style={{
-                  height: 40,
-                  borderColor: '#999999',
-                  borderWidth: 1,
-                  marginVertical: 10,
-                  padding: 8,
-                  fontSize: 12,
-                }}
-                onChangeText={comment => {
-                  this.setState({
-                    comment,
-                  });
-                }}
-              />
+                  flex: 1,
+                  width: smallerDimension,
+                  padding: 10,
+                }}>
+                <MoodSlider
+                  onChange={mood => {
+                    this.setState({
+                      mood,
+                    });
+                  }}
+                />
 
-              <Button
-                title="submit"
-                onPress={() => {
-                  const timestamp = Date.now();
-                  this.props.add({
-                    ...this.state,
-                    timestamp,
-                  });
-                  this.props.navigation.navigate('Insights');
-                }}
-              />
-              {isLoading && <ActivityIndicator />}
+                {feelingsList.map(feeling => {
+                  return this.renderFeeling(feeling);
+                })}
+
+                <TextInput
+                  value={this.state.comment}
+                  placeholder={'Type your optional note here...'}
+                  style={{
+                    height: 40,
+                    borderColor: '#999999',
+                    borderWidth: 1,
+                    marginVertical: 10,
+                    padding: 8,
+                    fontSize: 12,
+                  }}
+                  onChangeText={comment => {
+                    this.setState({
+                      comment,
+                    });
+                  }}
+                />
+
+                <Button
+                  title="submit"
+                  disabled={isLoading}
+                  onPress={() => {
+                    const timestamp = Date.now();
+                    this.props.add({
+                      ...this.state,
+                      timestamp,
+                    });
+                    this.props.navigation.navigate('Insights');
+                  }}
+                />
+                {isLoading && <ActivityIndicator />}
+              </View>
             </View>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </ErrorBoundary>
     );
   }
 }

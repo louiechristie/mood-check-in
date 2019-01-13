@@ -30,7 +30,7 @@ const getImage = number => {
 
 export default class Checkin extends React.Component {
   render() {
-    const { checkin } = this.props;
+    const { checkin, deleteButtonDisabled } = this.props;
     const { id, mood, feelings, timestamp, comment } = checkin;
     const dateString = new Date(timestamp).toLocaleDateString('en-GB');
 
@@ -82,7 +82,11 @@ export default class Checkin extends React.Component {
         </View>
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
           <View style={{ width: 100 }}>
-            <Button title="Delete" onPress={() => this.props.onPressDelete(checkin.id)} />
+            <Button
+              title="Delete"
+              disabled={deleteButtonDisabled}
+              onPress={() => this.props.onPressDelete(checkin.id)}
+            />
           </View>
         </View>
       </View>

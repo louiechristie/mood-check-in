@@ -2,6 +2,9 @@ import React from 'react';
 import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
 import AverageMoodChartContainer from '../containers/AverageMoodChartContainer';
 import Checkin from './Checkin';
+import ErrorBoundary from './ErrorBoundary';
+import SomethingWentWrong from './SomethingWentWrong';
+import NoData from './NoData';
 
 class Insights extends React.Component {
   constructor(props) {
@@ -19,11 +22,16 @@ class Insights extends React.Component {
   // }
 
   renderCheckin(checkin) {
+    const { hasErrored, isLoading } = this.props;
+    const deleteButtonDisabled = hasErrored || isLoading;
     return (
       <Checkin
         key={checkin.id}
         checkin={checkin}
-        onPressDelete={() => this.props.delete(checkin.id)}
+        deleteButtonDisabled={deleteButtonDisabled}
+        onPressDelete={() => {
+          if (!deleteButtonDisabled) this.props.delete(checkin.id);
+        }}
       />
     );
   }
@@ -32,11 +40,7 @@ class Insights extends React.Component {
     const { checkins, isLoading, hasErrored } = this.props;
 
     if (hasErrored) {
-      return (
-        <View>
-          <Text>Sorry, something went wrong. Please try again later.</Text>
-        </View>
-      );
+      return <SomethingWentWrong />;
     }
 
     if (checkins && checkins.length > 0) {
@@ -44,7 +48,9 @@ class Insights extends React.Component {
         checkins && (
           <ScrollView>
             <View style={{ flex: 1 }}>
-              <AverageMoodChartContainer checkins={checkins} />
+              <ErrorBoundary>
+                <AverageMoodChartContainer checkins={checkins} />
+              </ErrorBoundary>
 
               {isLoading && <ActivityIndicator />}
 
@@ -59,9 +65,7 @@ class Insights extends React.Component {
 
     return (
       <View>
-        <Text>No checkins yet</Text>
-
-        {isLoading && <ActivityIndicator />}
+        <NoData isLoading={isLoading} />
       </View>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import MyApp from './src/MyApp';
+import ErrorBoundary from './src/features/checkin/components/ErrorBoundary';
 
 export default class App extends React.Component {
   state = {
@@ -17,7 +18,11 @@ export default class App extends React.Component {
         />
       );
     } else {
-      return <MyApp />;
+      return (
+        <ErrorBoundary>
+          <MyApp />
+        </ErrorBoundary>
+      );
     }
   }
 

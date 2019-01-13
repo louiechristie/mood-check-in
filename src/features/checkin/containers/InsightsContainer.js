@@ -5,6 +5,7 @@ import { NavigationEvents } from 'react-navigation';
 import { Appbar } from 'react-native-paper';
 import { checkinsFetchData, checkinsDelete } from '../actions/checkins';
 import InsightsScreen from '../components/InsightsScreen';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 class InsightsContainer extends React.Component {
   static navigationOptions = {
@@ -22,10 +23,12 @@ class InsightsContainer extends React.Component {
 
   render() {
     return (
-      <View>
-        <NavigationEvents onDidFocus={this.props.fetchData} />
-        <InsightsScreen {...this.props} />
-      </View>
+      <ErrorBoundary>
+        <View>
+          <NavigationEvents onDidFocus={this.props.fetchData} />
+          <InsightsScreen {...this.props} />
+        </View>
+      </ErrorBoundary>
     );
   }
 }
