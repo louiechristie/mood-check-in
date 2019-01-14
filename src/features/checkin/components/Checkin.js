@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { View, Image } from 'react-native';
 import { Divider, List, Chip, IconButton } from 'react-native-paper';
 import Colors from '../../../constants/Colors';
@@ -34,8 +35,8 @@ export default class Checkin extends React.Component {
   render() {
     const { checkin, deleteButtonDisabled } = this.props;
     const { id, mood, feelings, timestamp, comment } = checkin;
-    const dateString = new Date(timestamp).toLocaleDateString('en-GB');
-    const timeString = new Date(timestamp).toLocaleTimeString('en-GB');
+    const dateString = moment(timestamp).format('D MMM');
+    const timeString = moment(timestamp).format('hh:mm');
 
     return (
       <View>
@@ -47,22 +48,25 @@ export default class Checkin extends React.Component {
             <Image
               resizeMode="contain"
               source={getImage(mood)}
-              style={{ width: 50, height: 50, marginTop: 20, marginBottom: 10, marginRight: 20 }}
+              style={{ width: 50, height: 50, marginTop: 20, marginRight: 20 }}
             />
           )}
           title={dateString}
           description={timeString}>
-          <List.Item
-            left={() => {
-              return feelings.map(feeling => {
-                return (
-                  <Chip style={{ marginRight: 6 }} key={feeling}>
-                    {feeling}
-                  </Chip>
-                );
-              });
-            }}
-          />
+          {feelings.length > 0 && (
+            <List.Item
+              left={() => {
+                return feelings.map(feeling => {
+                  return (
+                    <Chip style={{ marginRight: 6 }} key={feeling}>
+                      {feeling}
+                    </Chip>
+                  );
+                });
+              }}
+            />
+          )}
+
           <List.Item
             description={comment || 'Comments: N/A'}
             right={() => (

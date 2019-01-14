@@ -55,7 +55,11 @@ class Insights extends React.Component {
               {isLoading && <ActivityIndicator />}
 
               <View style={{ paddingHorizontal: 6 }}>
-                {checkins.map(checkin => this.renderCheckin(checkin))}
+                {checkins
+                  .sort(function(a, b) {
+                    return b.timestamp - a.timestamp;
+                  })
+                  .map(checkin => this.renderCheckin(checkin))}
               </View>
             </View>
           </ScrollView>
