@@ -5,13 +5,13 @@ import {
   View,
   Text,
   Dimensions,
-  TextInput,
   Switch,
-  Button,
   Platform,
   ActivityIndicator,
 } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
 import { withNavigation } from 'react-navigation';
+import Colors from '../../../constants/Colors';
 import MoodSlider from '../components/MoodSlider';
 import ErrorBoundary from '../components/ErrorBoundary';
 import SomethingWentWrong from '../components/SomethingWentWrong';
@@ -42,7 +42,7 @@ class CheckinScreen extends React.Component {
           alignItems: 'center',
           paddingVertical: 6,
         }}>
-        <Text>{thisFeeling}</Text>
+        <Text>{thisFeeling.charAt(0).toUpperCase() + thisFeeling.slice(1)}</Text>
         <Switch
           onValueChange={() => {
             if (includes) {
@@ -85,7 +85,6 @@ class CheckinScreen extends React.Component {
               style={{
                 flex: 1,
                 alignItems: 'center',
-                paddingVertical: 20,
               }}>
               <View
                 style={{
@@ -106,26 +105,23 @@ class CheckinScreen extends React.Component {
                 })}
 
                 <TextInput
+                  mode="outlined"
                   value={this.state.comment}
                   placeholder={'Type your optional note here...'}
-                  style={{
-                    height: 40,
-                    borderColor: '#999999',
-                    borderWidth: 1,
-                    marginVertical: 10,
-                    padding: 8,
-                    fontSize: 12,
-                  }}
                   onChangeText={comment => {
                     this.setState({
                       comment,
                     });
                   }}
+                  style={{ flex: 1, marginVertical: 6 }}
                 />
 
                 <Button
-                  title="submit"
+                  mode="contained"
+                  dark
                   disabled={isLoading}
+                  loading={isLoading}
+                  color={Colors.iconButtonAltColor}
                   onPress={() => {
                     const timestamp = Date.now();
                     add({
@@ -133,8 +129,9 @@ class CheckinScreen extends React.Component {
                       timestamp,
                     });
                     navigation.navigate('Insights');
-                  }}
-                />
+                  }}>
+                  Finish
+                </Button>
                 {isLoading && <ActivityIndicator />}
               </View>
             </View>

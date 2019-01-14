@@ -1,5 +1,4 @@
 const tintColor = '#3EB4B6';
-// #3EB4B6 This comment is for displaying tintColor in vsode colorize extension
 const white = '#FFFFFF';
 const grey = '#CCCCCC';
 
@@ -17,6 +16,7 @@ export default {
   noticeBackground: tintColor,
   noticeText: '#fff',
   iconButtonColor: tintColor,
+  iconButtonAltColor: '#084d7a',
   1: '#333333',
   2: '#084d7a',
   3: '#57A1D9',
