@@ -16,10 +16,6 @@ import MoodSlider from '../components/MoodSlider';
 import ErrorBoundary from '../components/ErrorBoundary';
 import SomethingWentWrong from '../components/SomethingWentWrong';
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
-const smallerDimension = Math.min(width, height);
-
 const feelingsList = ['optimistic', 'happy', 'bored', 'depressed'];
 
 class CheckinScreen extends React.Component {
@@ -69,6 +65,9 @@ class CheckinScreen extends React.Component {
 
   render() {
     const { isLoading, hasErrored, add, navigation } = this.props;
+    const width = Dimensions.get('window').width;
+    const height = Dimensions.get('window').height;
+    const smallerDimension = Math.min(width, height);
 
     if (hasErrored) {
       return <SomethingWentWrong />;

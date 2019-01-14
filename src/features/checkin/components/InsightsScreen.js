@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
+import { ScrollView, View, SafeAreaView, ActivityIndicator } from 'react-native';
 import AverageMoodChartContainer from '../containers/AverageMoodChartContainer';
 import Checkin from './Checkin';
 import ErrorBoundary from './ErrorBoundary';
@@ -47,7 +47,7 @@ class Insights extends React.Component {
       return (
         checkins && (
           <ScrollView>
-            <View style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1 }}>
               <ErrorBoundary>
                 <AverageMoodChartContainer checkins={checkins} />
               </ErrorBoundary>
@@ -61,7 +61,7 @@ class Insights extends React.Component {
                   })
                   .map(checkin => this.renderCheckin(checkin))}
               </View>
-            </View>
+            </SafeAreaView>
           </ScrollView>
         )
       );
