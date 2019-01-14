@@ -52,7 +52,7 @@ class Insights extends React.Component {
                 <AverageMoodChartContainer checkins={checkins} />
               </ErrorBoundary>
 
-              {isLoading && <ActivityIndicator />}
+              <View style={{ height: 20 }}>{isLoading && <ActivityIndicator />}</View>
 
               <View style={{ paddingHorizontal: 6 }}>
                 {checkins
