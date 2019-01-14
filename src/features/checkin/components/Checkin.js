@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, Button, Image } from 'react-native';
+import { View, Image } from 'react-native';
+import { Divider, List, Chip, IconButton } from 'react-native-paper';
+import Colors from '../../../constants/Colors';
 
 const checkin_1 = require('../../../assets/images/checkin_1.png');
 const checkin_2 = require('../../../assets/images/checkin_2.png');
@@ -33,62 +35,46 @@ export default class Checkin extends React.Component {
     const { checkin, deleteButtonDisabled } = this.props;
     const { id, mood, feelings, timestamp, comment } = checkin;
     const dateString = new Date(timestamp).toLocaleDateString('en-GB');
+    const timeString = new Date(timestamp).toLocaleTimeString('en-GB');
 
     return (
-      <View
-        key={id}
-        style={{
-          flex: 1,
-          justifyContent: 'space-around',
-          paddingVertical: 10,
-          borderTopWidth: 1,
-          borderTopColor: '#DDDDDD',
-        }}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            paddingVertical: 10,
-            alignItems: 'center',
-          }}>
-          <View style={{ flex: 1 }}>
-            <Text>{dateString}</Text>
-          </View>
-          <Image
-            resizeMode="contain"
-            source={getImage(mood)}
-            style={{ width: 50, height: 50, paddingVertical: 10, marginRight: 20 }}
-          />
-        </View>
+      <View>
+        <Divider />
 
-        <View style={{ flex: 1, flexDirection: 'row', paddingVertical: 10 }}>
-          <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'flex-start' }}>
-            {feelings.map(feeling => {
-              return (
-                <View
-                  key={feeling}
-                  style={{ padding: 4, marginRight: 4, backgroundColor: '#DDDDDD' }}>
-                  <Text>{feeling}</Text>
-                </View>
-              );
-            })}
-          </View>
-        </View>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-          <View>
-            <Text>{comment}</Text>
-          </View>
-        </View>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <View style={{ width: 100 }}>
-            <Button
-              title="Delete"
-              disabled={deleteButtonDisabled}
-              onPress={() => this.props.onPressDelete(checkin.id)}
+        <List.Accordion
+          key={id}
+          left={() => (
+            <Image
+              resizeMode="contain"
+              source={getImage(mood)}
+              style={{ width: 50, height: 50, marginTop: 20, marginBottom: 10, marginRight: 20 }}
             />
-          </View>
-        </View>
+          )}
+          title={dateString}
+          description={timeString}>
+          <List.Item
+            left={() => {
+              return feelings.map(feeling => {
+                return (
+                  <Chip style={{ marginRight: 6 }} key={feeling}>
+                    {feeling}
+                  </Chip>
+                );
+              });
+            }}
+          />
+          <List.Item
+            description={comment || 'Comments: N/A'}
+            right={() => (
+              <IconButton
+                icon="delete"
+                color={Colors.iconButtonColor}
+                disabled={deleteButtonDisabled}
+                onPress={() => this.props.onPressDelete(checkin.id)}
+              />
+            )}
+          />
+        </List.Accordion>
       </View>
     );
   }
