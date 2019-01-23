@@ -1,6 +1,6 @@
 const tintColor = '#3EB4B6';
 const white = '#FFFFFF';
-const grey = '#CCCCCC';
+// const grey = '#CCCCCC';
 
 export default {
   tintColor,
@@ -13,6 +13,7 @@ export default {
   errorText: '#fff',
   warningBackground: '#EAEB5E',
   warningText: '#666804',
+  dangerText: 'red',
   noticeBackground: tintColor,
   noticeText: '#fff',
   iconButtonColor: tintColor,
