@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, SafeAreaView, ActivityIndicator } from 'react-native';
+import { ScrollView, View, SafeAreaView, ActivityIndicator, Button } from 'react-native';
 import AverageMoodChartContainer from '../containers/AverageMoodChartContainer';
 import Checkin from './Checkin';
 import ErrorBoundary from './ErrorBoundary';
@@ -10,16 +10,28 @@ class Insights extends React.Component {
   constructor(props) {
     super(props);
     this.renderCheckin = this.renderCheckin.bind(this);
+    this.renderDeleteAllButton = this.renderDeleteAllButton.bind(this);
   }
 
-  // renderDeleteAllButton() {
-  //   return (
-  //     <Button
-  //       title="DeleteAll"
-  //       onPress={() => this.props.deleteMultiple(this.props.checkins.map(({ id }) => id))}
-  //     />
-  //   );
-  // }
+  renderDeleteAllButton() {
+    const { checkins } = this.props;
+
+    // const deleteMultiple () => this.props.deleteMultiple(this.props.checkins.map(({ id }) => id))
+
+    return (
+      <Button
+        title="Delete all"
+        onPress={() => {
+          console.log('Delete all button pressed');
+          for (let i = 0; i < checkins.length; i++) {
+            console.log('delete id: ', checkins[i].id);
+            this.props.delete(checkins[i].id);
+          }
+        }}
+        // checkins.map(({ checkin }) => this.props.delete(checkin.id));
+      />
+    );
+  }
 
   renderCheckin(checkin) {
     const { hasErrored, isLoading } = this.props;
@@ -48,6 +60,8 @@ class Insights extends React.Component {
         checkins && (
           <ScrollView>
             <SafeAreaView style={{ flex: 1 }}>
+              <View>{this.renderDeleteAllButton()}</View>
+
               <ErrorBoundary>
                 <AverageMoodChartContainer checkins={checkins} />
               </ErrorBoundary>
