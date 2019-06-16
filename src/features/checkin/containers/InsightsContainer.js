@@ -24,7 +24,9 @@ class InsightsContainer extends React.Component {
       header: (
         <Appbar.Header dark>
           <Appbar.Content title="Insights" />
-          <Appbar.Action icon={MORE_ICON} onPress={navigation.getParam('toggleModal')} />
+          {__DEV__ && (
+            <Appbar.Action icon={MORE_ICON} onPress={navigation.getParam('toggleModal')} />
+          )}
         </Appbar.Header>
       ),
     };
