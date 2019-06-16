@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, Dimensions } from 'react-native';
-import { Svg } from 'expo';
+import Svg from 'react-native-svg';
 import { VictoryPie } from 'victory-native';
 import Colors from '../../../constants/Colors';
 
