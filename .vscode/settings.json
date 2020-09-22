@@ -1,5 +1,8 @@
 {
-  "editor.formatOnSave": true,
-  "prettier.trailingComma": "es5",
-  "cSpell.words": ["Checkin"]
+  "cSpell.words": ["Checkin"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.markdownlint": true,
+  },
 }
