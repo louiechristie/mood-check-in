@@ -1,10 +1,12 @@
 import React from 'react';
 import { ScrollView, SafeAreaView, View, ActivityIndicator } from 'react-native';
+import { Paragraph } from 'react-native-paper';
+
 import AverageMoodChartContainer from '../containers/AverageMoodChartContainer';
 import Checkin from './Checkin';
 import ErrorBoundary from './ErrorBoundary';
-import SomethingWentWrong from './SomethingWentWrong';
 import NoData from './NoData';
+import SomethingWentWrong from './SomethingWentWrong';
 
 class Insights extends React.Component {
   constructor(props) {
@@ -45,12 +47,14 @@ class Insights extends React.Component {
 
               <View style={{ height: 20 }}>{isLoading && <ActivityIndicator />}</View>
 
+              <Paragraph style={{ padding: 10 }}>Moods are ephemeral ⛅</Paragraph>
+
               <View style={{ paddingHorizontal: 6 }}>
                 {checkins
-                  .sort(function(a, b) {
+                  .sort(function (a, b) {
                     return b.timestamp - a.timestamp;
                   })
-                  .map(checkin => this.renderCheckin(checkin))}
+                  .map((checkin) => this.renderCheckin(checkin))}
               </View>
             </SafeAreaView>
           </ScrollView>
