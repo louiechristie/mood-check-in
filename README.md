@@ -2,6 +2,10 @@
 
 App for recording your moods by doing a "check-in" from time to time.
 
+This is a portfolio project for [Louie Christie](https://www.louiechristie.com/) to demonstrate front-end coding with React Native, Expo, React Native Paper and Formidable Victory Charts.
+
+*⚠️ Note: Moods saved in the app are ephemeral and will disappear from time to time. Much like moods in real life ⛅. The back-end is mocked, and not implemented.*
+
 ## Prerequisites
 
 Install [node](https://nodejs.org/en/)
@@ -16,20 +20,32 @@ npm install expo-cli --global
 
 Clone the repo.
 
-```
+Install [yarn classic](https://classic.yarnpkg.com/lang/en/)
+
+Install dependencies, in a terminal type:
+
+```console
 yarn
 ```
 
-To start app
+To start app:
 
-```
+```console
 yarn start
+```
+
+## Lint and test
+
+```console
+yarn lint-staged
 ```
 
 ## Debugging
 
 Install [react native debugger](https://github.com/jhen0409/react-native-debugger)
 
-`open "rndebugger://set-debugger-loc?host=localhost&port=19001"`
+`open "rndebugger://set-debugger-loc?host=localhost&port=19001"` [- reference](https://github.com/expo/expo/issues/553#issuecomment-370350423)
 
-### References https://github.com/expo/expo/issues/553#issuecomment-370350423
+## Author
+
+[Louie Christie](https://www.louiechristie.com/) 2018 (2020)
