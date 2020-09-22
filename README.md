@@ -2,7 +2,7 @@
 
 App for recording your moods by doing a "check-in" from time to time.
 
-This is a portfolio project for [Louie Christie](https://www.louiechristie.com/) to demonstrate front-end coding with React Native, Expo, React Native Paper and Formidable Victory Charts.
+This is a portfolio project for [Louie Christie](https://www.louiechristie.com/) to demonstrate front-end coding with [React Native](https://reactnative.dev/), [Expo](https://docs.expo.io/), [React Native Paper](https://callstack.github.io/react-native-paper/) and [Formidable Victory Charts](https://formidable.com/open-source/victory/).
 
 *⚠️ Note: Moods saved in the app are ephemeral and will disappear from time to time. Much like moods in real life ⛅. The back-end is mocked, and not implemented.*
 
