@@ -8,7 +8,7 @@ import InsightsScreen from '../components/InsightsScreen';
 import ErrorBoundary from '../components/ErrorBoundary';
 import Colors from '../../../constants/Colors';
 
-const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
+const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 class InsightsContainer extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class InsightsContainer extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Insights',
-      header: (
+      header: () => (
         <Appbar.Header dark>
           <Appbar.Content title="Insights" />
           {__DEV__ && (

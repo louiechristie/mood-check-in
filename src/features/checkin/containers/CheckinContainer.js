@@ -8,7 +8,7 @@ import CheckinScreen from '../components/CheckinScreen';
 class CheckinContainer extends React.Component {
   static navigationOptions = {
     title: 'Check-in',
-    header: (
+    header: () => (
       <Appbar.Header dark>
         <Appbar.Content title="Check-in" />
       </Appbar.Header>

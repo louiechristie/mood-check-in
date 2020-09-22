@@ -3,9 +3,11 @@
     "name": "mood-check-in",
     "slug": "mood-check-in",
     "privacy": "public",
-    "sdkVersion": "34.0.0",
-    "platforms": ["ios", "android"],
-    "version": "0.0.3",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "0.0.4",
     "orientation": "default",
     "icon": "./src/assets/images/icon.png",
     "splash": {
@@ -16,7 +18,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },

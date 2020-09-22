@@ -11,7 +11,7 @@ class SettingsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Insights',
-      header: (
+      header: () => (
         <Appbar.Header dark>
           <Appbar.Content title="Settings" />
         </Appbar.Header>
