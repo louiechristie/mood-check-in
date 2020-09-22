@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Appbar } from 'react-native-paper';
 import { checkinsAdd } from '../actions/checkins';
