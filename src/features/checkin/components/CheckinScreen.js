@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  KeyboardAvoidingView,
-  ScrollView,
-  View,
-  Text,
-  Dimensions,
-  Switch,
-  Platform,
-  ActivityIndicator,
-} from 'react-native';
+import { ScrollView, View, Text, Dimensions, Switch, ActivityIndicator } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { withNavigation } from 'react-navigation';
 
@@ -76,68 +67,62 @@ class CheckinScreen extends React.Component {
 
     return (
       <ErrorBoundary>
-        <KeyboardAvoidingView
-          style={{ flex: 1 }}
-          behavior={Platform.OS === 'ios' ? 'position' : 'padding'}
-          enabled
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 80}>
-          <ScrollView>
+        <ScrollView>
+          <View
+            style={{
+              flex: 1,
+              // alignItems: 'center',
+            }}>
             <View
               style={{
                 flex: 1,
-                alignItems: 'center',
+                width: smallerDimension,
+                padding: 10,
               }}>
-              <View
-                style={{
-                  flex: 1,
-                  width: smallerDimension,
-                  padding: 10,
+              <MoodSlider
+                onChange={(mood) => {
+                  this.setState({
+                    mood,
+                  });
+                }}
+              />
+
+              {feelingsList.map((feeling) => {
+                return this.renderFeeling(feeling);
+              })}
+
+              <TextInput
+                mode="outlined"
+                value={this.state.comment}
+                placeholder="Type your optional note here..."
+                onChangeText={(comment) => {
+                  this.setState({
+                    comment,
+                  });
+                }}
+                style={{ flex: 1, marginVertical: 6 }}
+              />
+
+              <Button
+                mode="contained"
+                dark
+                disabled={isLoading}
+                loading={isLoading}
+                color={Colors.iconButtonAltColor}
+                onPress={() => {
+                  const timestamp = Date.now();
+                  add({
+                    ...this.state,
+                    timestamp,
+                  });
+                  navigation.navigate('Insights');
                 }}>
-                <MoodSlider
-                  onChange={(mood) => {
-                    this.setState({
-                      mood,
-                    });
-                  }}
-                />
-
-                {feelingsList.map((feeling) => {
-                  return this.renderFeeling(feeling);
-                })}
-
-                <TextInput
-                  mode="outlined"
-                  value={this.state.comment}
-                  placeholder="Type your optional note here..."
-                  onChangeText={(comment) => {
-                    this.setState({
-                      comment,
-                    });
-                  }}
-                  style={{ flex: 1, marginVertical: 6 }}
-                />
-
-                <Button
-                  mode="contained"
-                  dark
-                  disabled={isLoading}
-                  loading={isLoading}
-                  color={Colors.iconButtonAltColor}
-                  onPress={() => {
-                    const timestamp = Date.now();
-                    add({
-                      ...this.state,
-                      timestamp,
-                    });
-                    navigation.navigate('Insights');
-                  }}>
-                  Finish
-                </Button>
-                {isLoading && <ActivityIndicator />}
-              </View>
+                Finish
+              </Button>
+              {isLoading && <ActivityIndicator />}
             </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
+          </View>
+        </ScrollView>
       </ErrorBoundary>
     );
   }
