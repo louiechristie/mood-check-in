@@ -4,7 +4,7 @@
     "slug": "mood-check-in",
     "privacy": "public",
     "platforms": ["ios", "android", "web"],
-    "version": "0.0.4",
+    "version": "0.2.0",
     "orientation": "default",
     "icon": "./src/assets/images/icon.png",
     "splash": {
