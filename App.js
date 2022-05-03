@@ -1,8 +1,9 @@
-import React from 'react';
-import { AppLoading } from 'expo';
 import * as Icon from '@expo/vector-icons';
-import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
 import { Asset } from 'expo-asset';
+import * as Font from 'expo-font';
+import React from 'react';
+
 import MyApp from './src/MyApp';
 import ErrorBoundary from './src/features/checkin/components/ErrorBoundary';
 
@@ -50,7 +51,7 @@ export default class App extends React.Component {
     ]);
   };
 
-  _handleLoadingError = error => {
+  _handleLoadingError = (error) => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
     console.warn(error);

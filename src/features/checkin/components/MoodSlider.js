@@ -1,6 +1,9 @@
+import Slider from '@react-native-community/slider';
 import React from 'react';
-import { StyleSheet, View, Slider, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
+
 import Colors from '../../../constants/Colors';
+
 const checkin_1 = require('../../../assets/images/checkin_1.png');
 const checkin_2 = require('../../../assets/images/checkin_2.png');
 const checkin_3 = require('../../../assets/images/checkin_3.png');
@@ -31,7 +34,7 @@ export default class MoodSlider extends React.Component {
   renderImage() {
     const value = this.state.value;
 
-    const getImageSource = mood => {
+    const getImageSource = (mood) => {
       switch (mood) {
         case 1:
           return checkin_1;

@@ -11,9 +11,10 @@ import {
 } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { withNavigation } from 'react-navigation';
+
 import Colors from '../../../constants/Colors';
-import MoodSlider from '../components/MoodSlider';
 import ErrorBoundary from '../components/ErrorBoundary';
+import MoodSlider from '../components/MoodSlider';
 import SomethingWentWrong from '../components/SomethingWentWrong';
 
 const feelingsList = ['optimistic', 'happy', 'bored', 'depressed'];
@@ -47,7 +48,7 @@ class CheckinScreen extends React.Component {
           onValueChange={() => {
             if (includes) {
               this.setState({
-                feelings: feelings.filter(feeling => {
+                feelings: feelings.filter((feeling) => {
                   return feeling !== thisFeeling;
                 }),
               });
@@ -93,22 +94,22 @@ class CheckinScreen extends React.Component {
                   padding: 10,
                 }}>
                 <MoodSlider
-                  onChange={mood => {
+                  onChange={(mood) => {
                     this.setState({
                       mood,
                     });
                   }}
                 />
 
-                {feelingsList.map(feeling => {
+                {feelingsList.map((feeling) => {
                   return this.renderFeeling(feeling);
                 })}
 
                 <TextInput
                   mode="outlined"
                   value={this.state.comment}
-                  placeholder={'Type your optional note here...'}
-                  onChangeText={comment => {
+                  placeholder="Type your optional note here..."
+                  onChangeText={(comment) => {
                     this.setState({
                       comment,
                     });

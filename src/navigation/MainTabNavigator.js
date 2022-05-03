@@ -1,15 +1,16 @@
+import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { createStackNavigator } from 'react-navigation-stack'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createStackNavigator } from 'react-navigation-stack';
+
 import Colors from '../constants/Colors';
-import TabBarSvgIcon from './components/TabBarSvgIcon';
-import CheckinIcon from './components/CheckinIcon';
-import FlashIcon from './components/FlashIcon';
-import FlashFillIcon from './components/FlashFillIcon';
 import CheckinTab from '../features/checkin/containers/CheckinContainer';
 import InsightsTab from '../features/checkin/containers/InsightsContainer';
 import SettingsTab from '../features/settings/SettingsScreen';
+import CheckinIcon from './components/CheckinIcon';
+import FlashFillIcon from './components/FlashFillIcon';
+import FlashIcon from './components/FlashIcon';
+import TabBarSvgIcon from './components/TabBarSvgIcon';
 
 const CheckinStack = createStackNavigator({
   Checkin: CheckinTab,
@@ -49,9 +50,9 @@ InsightsStack.navigationOptions = {
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
-    <MaterialCommunityIcons
+    <Ionicons
       name={focused ? 'settings' : 'settings-outline'}
-      size={26}
+      size={24}
       color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
     />
   ),
