@@ -1,12 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { View, Platform } from 'react-native';
-import { NavigationEvents } from 'react-navigation';
 import { Appbar, Portal, Modal, Drawer, Surface } from 'react-native-paper';
-import { checkinsFetchData, checkinsDelete } from '../actions/checkins';
-import InsightsScreen from '../components/InsightsScreen';
-import ErrorBoundary from '../components/ErrorBoundary';
+import { NavigationEvents } from 'react-navigation';
+import { connect } from 'react-redux';
+
 import Colors from '../../../constants/Colors';
+import { checkinsDelete } from '../actions/checkins';
+import ErrorBoundary from '../components/ErrorBoundary';
+import InsightsScreen from '../components/InsightsScreen';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
@@ -33,7 +34,6 @@ class InsightsContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchData();
     this.props.navigation.setParams({ toggleModal: this.toggleModal });
   }
 
@@ -58,7 +58,7 @@ class InsightsContainer extends React.Component {
     return (
       <ErrorBoundary>
         <View>
-          <NavigationEvents onDidFocus={this.props.fetchData} />
+          <NavigationEvents />
           <InsightsScreen {...this.props} />
           <Portal>
             <Modal visible={showModal} onDismiss={this.toggleModal}>
@@ -91,7 +91,7 @@ class InsightsContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     checkins: state.checkins,
     hasErrored: state.checkinsHasErrored,
@@ -99,14 +99,10 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: () => dispatch(checkinsFetchData()),
-    deleteId: id => dispatch(checkinsDelete(id)),
+    deleteId: (id) => dispatch(checkinsDelete(id)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InsightsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(InsightsContainer);

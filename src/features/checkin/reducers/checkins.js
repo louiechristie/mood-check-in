@@ -1,7 +1,6 @@
 import {
   CHECKINS_HAS_ERRORED,
   CHECKINS_IS_LOADING,
-  CHECKINS_FETCH_DATA_SUCCESS,
   CHECKINS_DELETE_SUCCESS,
   CHECKINS_ADD_SUCCESS,
 } from '../constants/ActionTypes';
@@ -24,8 +23,6 @@ export function checkinsIsLoading(state = false, action) {
 }
 export function checkins(state = [], action) {
   switch (action.type) {
-    case CHECKINS_FETCH_DATA_SUCCESS:
-      return action.checkins;
     case CHECKINS_DELETE_SUCCESS:
       return state.filter(({ id }) => id !== action.id);
     case CHECKINS_ADD_SUCCESS:
