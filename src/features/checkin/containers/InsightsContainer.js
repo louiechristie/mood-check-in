@@ -9,6 +9,8 @@ import { checkinsDelete } from '../actions/checkins';
 import ErrorBoundary from '../components/ErrorBoundary';
 import InsightsScreen from '../components/InsightsScreen';
 
+const DEBUG = false;
+
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 class InsightsContainer extends React.Component {
@@ -57,7 +59,7 @@ class InsightsContainer extends React.Component {
     const { showModal } = this.state;
     return (
       <ErrorBoundary>
-        <View>
+        <View style={{ flex: 1, borderWidth: DEBUG ? 8 : null, borderColor: 'orange' }}>
           <NavigationEvents />
           <InsightsScreen {...this.props} />
           <Portal>

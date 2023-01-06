@@ -1,6 +1,6 @@
 import Slider from '@react-native-community/slider';
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 
 import Colors from '../../../constants/Colors';
 
@@ -11,6 +11,8 @@ const checkin_4 = require('../../../assets/images/checkin_4.png');
 const checkin_5 = require('../../../assets/images/checkin_5.png');
 const checkin_6 = require('../../../assets/images/checkin_6.png');
 const checkin_7 = require('../../../assets/images/checkin_7.png');
+
+const DEBUG = false;
 
 export default class MoodSlider extends React.Component {
   constructor(props) {
@@ -60,9 +62,11 @@ export default class MoodSlider extends React.Component {
         source={getImageSource(value)}
         resizeMode="contain"
         style={{
-          flex: 1,
-          width: 100,
-          height: 100,
+          minHeight: 75, // fix for web
+          minWidth: 75, // fix for web
+          flexBasis: 75,
+          flexShrink: 1,
+          flexGrow: 2,
         }}
       />
     );
@@ -71,34 +75,31 @@ export default class MoodSlider extends React.Component {
   render() {
     const { value } = this.state;
     return (
-      <View style={styles.container}>
-        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }}>
+      <View
+        style={{ borderWidth: DEBUG ? 8 : 0, borderColor: 'red', justifyContent: 'space-around' }}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderWidth: DEBUG ? 4 : 0,
+            borderColor: 'orange',
+            paddingBottom: 20,
+          }}>
           {this.renderImage()}
         </View>
 
-        <Slider
-          step={1}
-          minimumValue={1}
-          maximumValue={7}
-          onValueChange={this.change}
-          value={value}
-          thumbTintColor={Colors.tintColor}
-          style={{ flex: 1, paddingTop: 20 }}
-        />
+        <View style={{ borderWidth: DEBUG ? 4 : 0, borderColor: 'orange' }}>
+          <Slider
+            step={1}
+            minimumValue={1}
+            maximumValue={7}
+            onValueChange={this.change}
+            value={value}
+            thumbTintColor={Colors.tintColor}
+            style={{ paddingTop: 20, borderWidth: DEBUG ? 2 : 0, borderColor: 'yellow' }}
+          />
+        </View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    marginVertical: 10,
-  },
-  image: {
-    flex: 1,
-    width: 100,
-    height: 100,
-  },
-});

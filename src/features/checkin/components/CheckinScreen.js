@@ -8,6 +8,8 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import MoodSlider from '../components/MoodSlider';
 import SomethingWentWrong from '../components/SomethingWentWrong';
 
+const DEBUG = false;
+
 const feelingsList = ['optimistic', 'happy', 'bored', 'depressed'];
 
 class CheckinScreen extends React.Component {
@@ -28,14 +30,16 @@ class CheckinScreen extends React.Component {
       <View
         key={thisFeeling}
         style={{
-          flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingVertical: 6,
+          paddingVertical: 2,
+          borderWidth: DEBUG ? 1 : 0,
+          borderColor: 'blue',
         }}>
         <Text>{thisFeeling.charAt(0).toUpperCase() + thisFeeling.slice(1)}</Text>
         <Switch
+          style={{ borderWidth: DEBUG ? 1 : 0, borderColor: 'indigo' }}
           onValueChange={() => {
             if (includes) {
               this.setState({
@@ -67,60 +71,76 @@ class CheckinScreen extends React.Component {
 
     return (
       <ErrorBoundary>
-        <ScrollView>
+        <ScrollView
+          contentContainerStyle={{
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            height: '100%',
+            borderWidth: DEBUG ? 8 : 0,
+            borderColor: 'red',
+            padding: 10,
+          }}>
           <View
             style={{
-              flex: 1,
-              // alignItems: 'center',
+              width: smallerDimension,
+              padding: 10,
+              borderWidth: DEBUG ? 2 : 0,
+              borderColor: 'orange',
             }}>
-            <View
-              style={{
-                flex: 1,
-                width: smallerDimension,
-                padding: 10,
+            <MoodSlider
+              onChange={(mood) => {
+                this.setState({
+                  mood,
+                });
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              padding: 10,
+              borderWidth: DEBUG ? 2 : 0,
+              borderColor: 'orange',
+            }}>
+            {feelingsList.map((feeling) => {
+              return this.renderFeeling(feeling);
+            })}
+
+            <TextInput
+              mode="outlined"
+              value={this.state.comment}
+              placeholder="Type your optional note here..."
+              onChangeText={(comment) => {
+                this.setState({
+                  comment,
+                });
+              }}
+              dense
+            />
+          </View>
+
+          <View
+            style={{
+              borderWidth: DEBUG ? 2 : 0,
+              borderColor: 'orange',
+            }}>
+            <Button
+              mode="contained"
+              dark
+              disabled={isLoading}
+              loading={isLoading}
+              color={Colors.iconButtonAltColor}
+              onPress={() => {
+                const timestamp = Date.now();
+                add({
+                  ...this.state,
+                  timestamp,
+                });
+                navigation.navigate('Insights');
               }}>
-              <MoodSlider
-                onChange={(mood) => {
-                  this.setState({
-                    mood,
-                  });
-                }}
-              />
-
-              {feelingsList.map((feeling) => {
-                return this.renderFeeling(feeling);
-              })}
-
-              <TextInput
-                mode="outlined"
-                value={this.state.comment}
-                placeholder="Type your optional note here..."
-                onChangeText={(comment) => {
-                  this.setState({
-                    comment,
-                  });
-                }}
-                style={{ flex: 1, marginVertical: 6 }}
-              />
-
-              <Button
-                mode="contained"
-                dark
-                disabled={isLoading}
-                loading={isLoading}
-                color={Colors.iconButtonAltColor}
-                onPress={() => {
-                  const timestamp = Date.now();
-                  add({
-                    ...this.state,
-                    timestamp,
-                  });
-                  navigation.navigate('Insights');
-                }}>
-                Finish
-              </Button>
-              {isLoading && <ActivityIndicator />}
-            </View>
+              Finish
+            </Button>
+            {isLoading && <ActivityIndicator />}
           </View>
         </ScrollView>
       </ErrorBoundary>

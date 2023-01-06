@@ -1,10 +1,11 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { Provider } from 'react-redux';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import configureStore from './store/configureStore';
-import AppNavigator from './navigation/AppNavigator';
+import { Provider } from 'react-redux';
+
 import Colors from './constants/Colors';
+import AppNavigator from './navigation/AppNavigator';
+import configureStore from './store/configureStore';
 
 const store = configureStore();
 

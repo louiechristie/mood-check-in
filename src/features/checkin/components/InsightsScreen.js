@@ -8,6 +8,7 @@ import ErrorBoundary from './ErrorBoundary';
 import NoData from './NoData';
 import SomethingWentWrong from './SomethingWentWrong';
 
+const DEBUG = false;
 class Insights extends React.Component {
   constructor(props) {
     super(props);
@@ -63,7 +64,14 @@ class Insights extends React.Component {
     }
 
     return (
-      <View>
+      <View
+        style={{
+          flex: 1,
+          borderWidth: DEBUG ? 4 : null,
+          borderColor: 'red',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
         <NoData isLoading={isLoading} />
       </View>
     );
