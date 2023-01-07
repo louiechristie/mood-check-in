@@ -6,7 +6,11 @@
     "ios": "expo start --ios",
     "eject": "expo eject",
     "test": "jest --watchAll",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "yarn deploy:expo && yarn build:web && yarn deploy:web",
+    "deploy:expo": "expo publish",
+    "build:web": "expo export:web",
+    "deploy:web": "yarn build:web && rsync -avP ~/Documents/mood-check-in/web-build/ pi@192.168.1.101:/var/www/html/mood-check-in"
   },
   "jest": {
     "preset": "react-native",
@@ -27,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/louiechristie/mood-check-in/issues"
   },
-  "homepage": "https://github.com/louiechristie/mood-check-in#readme",
+  "homepage": "/mood-check-in",
   "private": true,
   "lint-staged": {
     "**/*.+(md)": [
