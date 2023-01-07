@@ -49,11 +49,11 @@ export function checkins(state = defaultState, action) {
 
   switch (action.type) {
     case CHECKINS_DELETE_SUCCESS:
-      console.log('action: ', action);
+      DEBUG && console.log('action: ', action);
       return state.filter(({ timestamp }) => timestamp !== action.timestamp);
     case CHECKINS_ADD_SUCCESS:
       newState = [...state, action.checkin];
-      console.log(`newState: `, JSON.stringify(newState, null, 2));
+      DEBUG && console.log(`newState: `, JSON.stringify(newState, null, 2));
       return newState;
     default:
       return state;

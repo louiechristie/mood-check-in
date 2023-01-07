@@ -48,9 +48,9 @@ class InsightsContainer extends React.Component {
   deleteAll = () => {
     const { checkins, deleteId } = this.props;
 
-    console.log('Delete all button pressed');
+    DEBUG && console.log('Delete all button pressed');
     for (const checkin of checkins) {
-      console.log('delete timestamp: ', checkin.timestamp);
+      DEBUG && console.log('delete timestamp: ', checkin.timestamp);
       deleteId(checkin.timestamp);
     }
   };
