@@ -50,8 +50,8 @@ class InsightsContainer extends React.Component {
 
     console.log('Delete all button pressed');
     for (const checkin of checkins) {
-      console.log('delete id: ', checkin.id);
-      deleteId(checkin.id);
+      console.log('delete timestamp: ', checkin.timestamp);
+      deleteId(checkin.timestamp);
     }
   };
 
@@ -59,7 +59,7 @@ class InsightsContainer extends React.Component {
     const { showModal } = this.state;
     return (
       <ErrorBoundary>
-        <View style={{ flex: 1, borderWidth: DEBUG ? 8 : null, borderColor: 'orange' }}>
+        <View style={{ flex: 1, borderWidth: DEBUG ? 8 : null, borderColor: 'red' }}>
           <NavigationEvents />
           <InsightsScreen {...this.props} />
           <Portal>
@@ -103,7 +103,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteId: (id) => dispatch(checkinsDelete(id)),
+    deleteId: (timestamp) => dispatch(checkinsDelete(timestamp)),
   };
 };
 

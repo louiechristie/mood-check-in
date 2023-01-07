@@ -20,11 +20,11 @@ class Insights extends React.Component {
     const deleteButtonDisabled = hasErrored || isLoading;
     return (
       <Checkin
-        key={checkin.id}
+        key={checkin.timestamp}
         checkin={checkin}
         deleteButtonDisabled={deleteButtonDisabled}
         onPressDelete={() => {
-          if (!deleteButtonDisabled) deleteId(checkin.id);
+          if (!deleteButtonDisabled) deleteId(checkin.timestamp);
         }}
       />
     );
@@ -41,16 +41,24 @@ class Insights extends React.Component {
       return (
         checkins && (
           <ScrollView>
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1, borderWidth: DEBUG ? 4 : null, borderColor: 'orange' }}>
               <ErrorBoundary>
                 <AverageMoodChartContainer checkins={checkins} />
               </ErrorBoundary>
 
               <View style={{ height: 20 }}>{isLoading && <ActivityIndicator />}</View>
 
-              <Paragraph style={{ padding: 10 }}>Moods are ephemeral ⛅</Paragraph>
+              <Paragraph
+                style={{ padding: 10, borderWidth: DEBUG ? 2 : null, borderColor: 'yellow' }}>
+                Moods are ephemeral ⛅
+              </Paragraph>
 
-              <View style={{ paddingHorizontal: 6 }}>
+              <View
+                style={{
+                  paddingHorizontal: 6,
+                  borderWidth: DEBUG ? 2 : null,
+                  borderColor: 'yellow',
+                }}>
                 {checkins
                   .sort(function (a, b) {
                     return b.timestamp - a.timestamp;

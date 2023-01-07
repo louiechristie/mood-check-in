@@ -6,8 +6,6 @@ import {
   CHECKINS_ADD_SUCCESS,
 } from '../constants/ActionTypes';
 
-const url = `${URL_BASE_API}${URL_PATH_CHECKINS}`;
-
 export function checkinsHasErrored(bool) {
   return {
     type: CHECKINS_HAS_ERRORED,
@@ -21,18 +19,18 @@ export function checkinsIsLoading(bool) {
   };
 }
 
-export function checkinsDeleteSuccess(id) {
+export function checkinsDeleteSuccess(timestamp) {
   return {
     type: CHECKINS_DELETE_SUCCESS,
-    id,
+    timestamp,
   };
 }
 
-export function checkinsDelete(id) {
-  console.log('checkinsDelete id: ', id);
+export function checkinsDelete(timestamp) {
+  console.log('checkinsDelete timestamp: ', timestamp);
 
   return (dispatch) => {
-    dispatch(checkinsDeleteSuccess(id));
+    dispatch(checkinsDeleteSuccess(timestamp));
   };
 }
 

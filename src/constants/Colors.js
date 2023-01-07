@@ -1,4 +1,4 @@
-const tintColor = '#3EB4B6';
+const tintColor = '#3EB4B6'; // teal
 const white = '#FFFFFF';
 // const grey = '#CCCCCC';
 
@@ -18,11 +18,11 @@ export default {
   noticeText: '#fff',
   iconButtonColor: tintColor,
   iconButtonAltColor: '#084d7a',
-  1: '#333333',
-  2: '#084d7a',
-  3: '#57A1D9',
-  4: tintColor,
-  5: '#87AB1D',
-  6: '#96BC1F',
-  7: '#F9BD00',
+  1: '#333333', // Black
+  2: '#084d7a', // Dark blue
+  3: '#57A1D9', // Blue
+  4: tintColor, // Even teal
+  5: '#87AB1D', // Citron green
+  6: '#96BC1F', // Cornflower Blue
+  7: '#F9BD00', // Golden yellow
 };
